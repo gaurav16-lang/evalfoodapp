@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>menu</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<style>
+    h1{
+        color: white;
+    }
+    body{
+        background: black;
+    }
+.container{
+        width:100%;
+        
+        display: grid;
+        grid-template-columns: repeat(4,22%);
+        gap:1.5%
+
+    }
+    .small{
+        overflow-x: hidden;
+       
+        height: 400px;
+        margin-left: 15px;
+        color: white;
+    }
+    .nws{
+        height: 2vh;
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+</style>
+    
+</head>
+<body>
+
+    <h1 class="text-center">MENU</h1>
+
+    <div class="container" id="cont">
+
+    </div>
+
+
+
+    
+</body>
+
+
+
+
+<script>
+
+let container = document.getElementById("cont");
+ async function display()
+ {
+     let res = await fetch(`http://www.themealdb.com/api/json/v1/1/categories.php`)
+     let data = await res.json();
+    
+     let t = data.categories;
+     console.log(t);
+
+     t.forEach(({strCategory,strCategoryDescription,strCategoryThumb})=>{
+        let div = document.createElement("div");
+ div.setAttribute("class","small");
+ let image = document.createElement("img");
+ image.src = strCategoryThumb;
+ let p = document.createElement("p");
+ p.innerHTML=strCategory;
+ let div2=document.createElement("div");
+ div2.setAttribute("class","nws");
+ 
+ let ps = document.createElement("p");
+ ps.innerHTML=strCategoryDescription;
+ div2.append(ps)
+ let price = document.createElement("p");
+ price.innerHTML="rs 300";
+ price.style.marginTop="20px"
+ let button = document.createElement("button");
+ button.innerHTML="add to cart";
+ button.addEventListener("click",()=>{
+
+    addtocart(t);
+ })
+ div.append(image,p,div2,price,button);
+ container.append(div);
+     })
+     
+ }
+
+
+ function addtocart(data)
+ {
+
+    if(localStorage.getItem("gaurdish")==null)
+    {
+        localStorage.setItem("gaurdish",JSON.stringify([]));
+    }
+
+    let pro = JSON.parse(localStorage.getItem("gaurdish"));
+    pro.push(data);
+
+localStorage.setItem("gaurdish",JSON.stringify(pro));
+
+
+
+ }
+
+
+ 
+ display();
+
+
+
+</script>
+</html>

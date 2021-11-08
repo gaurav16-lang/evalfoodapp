@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>signin</title>
+
+    <style>
+      .bg {
+        width: 100%;
+        transform: translateX(40%);
+      }
+
+      input {
+        display: block;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="form" class="bg">
+      <form id="signup" onsubmit="signup(event)" class="gaurav">
+        <h1 class="text-center">signup</h1>
+
+        <input type="text" id="name" placeholder="name" />
+        <input type="email" id="email" placeholder="email" />
+        <input type="password" id="password" placeholder="password" />
+        <input type="text" id="username" placeholder="username" />
+        <input type="number" id="mobile" placeholder="mobile" />
+        <input type="text" id="description" placeholder="description" />
+        <input type="submit" />
+      </form>
+    </div>
+  </body>
+
+  <script>
+
+
+        function signup(e) {
+            e.preventDefault()
+            let form = document.getElementById("signup");
+
+
+            let user = {
+
+
+                name: form.name.value,
+                email:form.email.value,
+                password:form.password.value,
+                username:form.username.value,
+                mobile:form.mobile.value,
+                description:form.description.value,
+
+            };
+            console.log(user);
+
+            user = JSON.stringify(user);
+            fetch("https://masai-api-mocker.herokuapp.com/auth/register",{
+                method:"POST",
+                body:user,
+                headers:{
+                    "Content-Type": "application/json",
+                }
+            })
+            .then((res)=>{
+                return res.json();
+            })
+            .then((res)=>
+            {
+                console.log(res);
+                check(res);
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
+
+        }
+
+
+    function check(e)
+    {
+        if(e.message =="Registration Success")
+        {
+            div1 = document.createElement("div");
+            let form = document.getElementById("signup");
+            div1.innerHTML= "Registration Success";
+            form.append(div1);
+        }
+    }
+  </script>
+</html>

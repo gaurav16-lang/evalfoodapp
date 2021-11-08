@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+
+
+    <style>
+ .bg {
+        width: 100%;
+        transform: translateX(40%);
+      }
+
+      input {
+        display: block;
+        margin-top: 5px;
+      }
+
+
+    </style>
+</head>
+<body>
+    <div id="form" class="bg">
+        <form id="login" onsubmit="login(event)" class="gaurav">
+          <h1 class="text-center">login</h1>
+  
+       
+          
+          <input type="password" id="password" placeholder="password" />
+          <input type="text" id="username" placeholder="username" />
+          
+          <input type="submit" />
+        </form>
+      </div>
+</body>
+
+<script>
+
+    function login(e)
+    {
+        e.preventDefault();
+        let form = document.getElementById("login");
+        let user = {
+            username: form.username.value,
+            password:form.password.value,
+        }
+
+        user = JSON.stringify(user);
+        console.log(user);
+        fetch("https://masai-api-mocker.herokuapp.com/auth/login",{
+            method:"POST",
+            body:user,
+            headers:{
+                    "Content-Type": "application/json",
+                }
+        })
+        .then((res)=>{
+            return res.json();
+        })
+        .then((res)=>{
+            console.log(res);
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+    }
+
+    function fetchdata(username, token)
+    {
+        fetch(`http://masai-api-mocker.herokuapp.com/user/${username}`,{
+            headers:{
+                "Content-Type":"application/json",
+                Authorization:`Bearer ${token}`,
+            }
+        })
+        .then((res)=>{
+            return res.json()
+        })
+        .then((res)=>{
+            // console.log(res);
+            display(res);
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+    }
+
+
+    function display(data)
+    {
+        console.log("gaurav")
+        let bigg = document.createElement("div");
+        let p = document.createElement("p");
+       p.innerHTML=`username : ${data.username}`;
+       console.log(p);
+    }
+
+   
+</script>
+</html>

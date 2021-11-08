@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>landingpage</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+body{
+    background: url("https://images.creativemarket.com/0.1.0/ps/5004161/1820/1214/m1/fpnw/wm1/hzdrgael1huz23dfbu10cbctpcsoryzxick8p6sn3tas9sc1bk5py9tmmvxsroxh-.jpg?1536143984&s=1b6b15e0c7ca9283ff6a249ef264b3e8");
+}
+        .navbar{
+            width: 100%;
+            border: 1px solid red;
+            display: flex;
+            background: black;
+           
+        }
+        .cont{
+            width: 30%;
+            margin-left: 30%;
+            display: flex;
+            gap: 8%;
+            justify-content: center;
+            cursor: grab;
+           
+        }
+        .logo{
+            width: 20%;
+           
+            height: 10vh;
+            margin-left: 50px;
+        }
+.logo img{
+  height: 100%;
+}
+p{
+    color: red;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+
+        <div class="logo">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSvUFzVIgW-iBI-jq2UmZyRxkfj5TAhTm17x6b-J1VZ2po6JriNhffVeAOYkZim-zmdBM&usqp=CAU" alt="">
+        </div>
+
+        <div class="cont">
+            <div class="login" id="login">
+                <p class="">login</p>
+            </div>
+            <div class="signup" id="signin">
+               <p>signup</p> 
+            </div>
+            <div class="menu" id="menu">
+               <p>menu</p> 
+            </div>
+        </div>
+
+    </div>
+    
+</body>
+
+
+<script>
+
+let login = document.getElementById("login");
+ let signup = document.getElementById("signin");
+let menu = document.getElementById("menu");
+
+login.addEventListener("click",()=>{
+    window.location.href = "login.html"
+})
+signup.addEventListener("click",()=>{
+    window.location.href = "signin.html"
+})
+menu.addEventListener("click",()=>{
+    window.location.href = "menu.html"
+})
+</script>
+</html>
